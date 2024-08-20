@@ -17,9 +17,12 @@ app.use((req, res, next) => {
 app.get('/api/fantasy/:managerId', async (req, res) => {
   try {
     const { managerId } = req.params;
+	console.log(`Fetching data for manager ID: ${managerId}`);
     const response = await axios.get(`https://fantasy.premierleague.com/api/entry/${managerId}/`);
-    res.json(response.data);
+    console.log('Data fetched successfully');
+	res.json(response.data);
   } catch (error) {
+	console.error('Error fetching data:', error.message);
     res.status(500).json({ error: 'Failed to fetch data' });
   }
 });
